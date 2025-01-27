@@ -54,10 +54,12 @@ public class NormalBowl extends Bowl {
 
     public void doMove() {
         if (owner.getIsMyTurn() && !(seedCount == 0)) {
-            neighbour.keepOneSeedPassRest(seedCount);
+            int seedsToPassOn = seedCount;
             seedCount = 0;
+            neighbour.keepOneSeedPassRest(seedsToPassOn);
             owner.passTurn(this);
         }
+
     }
 
     @Override
@@ -111,6 +113,10 @@ public class NormalBowl extends Bowl {
         } else {
             transferToKalaha(player);
         }
+    }
+
+    Boolean sideIsEmpty() {
+        return sideIsEmpty(owner);
     }
 
     Boolean sideIsEmpty(Player player) {

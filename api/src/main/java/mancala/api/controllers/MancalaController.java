@@ -57,6 +57,8 @@ public class MancalaController {
         // Retrieve HTTP session.
         HttpSession session = request.getSession(false);
 
+        System.out.println("Play at: " + body.getIndexToPlay());
+
         // Retrieve game ID.
         String gameId = (String) session.getAttribute("gameId");
 
@@ -71,6 +73,31 @@ public class MancalaController {
 
         // Use the game to create a DTO.
         MancalaDTO output = new MancalaDTO(mancala);
+
+        // Send DTO back in response.
+        return Response.status(200).entity(output).build();
+    }
+
+    @Path("/getPit")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response play(@Context HttpServletRequest request, PitDTO body) {
+        System.out.println("Ping!");
+        // Retrieve HTTP session.
+        HttpSession session = request.getSession(false);
+
+        // Retrieve game ID.
+        String gameId = (String) session.getAttribute("gameId");
+
+        // Retrieve the game from the database
+        IMancala mancala = repository.get(gameId);
+
+        // Read index from body
+        int index = body.getIndex();
+
+        // Use the game to create a DTO.
+        PitDTO output = new PitDTO(index, mancala.getStonesForPit(index));
 
         // Send DTO back in response.
         return Response.status(200).entity(output).build();

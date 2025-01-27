@@ -10,7 +10,10 @@ import jakarta.servlet.http.*;
 import jakarta.ws.rs.core.*;
 import mancala.api.models.*;
 import mancala.domain.IMancalaFactory;
+import mancala.domain.MancalaFactory;
+import mancala.domain.IMancala;
 import mancala.persistence.IMancalaRepository;
+import mancala.persistence.MancalaRepository;
 
 public class MancalaControllerTest {
 
@@ -104,8 +107,8 @@ public class MancalaControllerTest {
     }
 
     private void createController() {
-        IMancalaFactory factory = null; // TODO: get implementation from domain
-        IMancalaRepository repository = null; // TODO: get implementation from persistence
+        IMancalaFactory factory = new MancalaFactory();
+        IMancalaRepository repository = new MancalaRepository();
         controller = new MancalaController(factory, repository);
     }
 

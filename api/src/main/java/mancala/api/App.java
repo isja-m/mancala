@@ -8,7 +8,9 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import mancala.api.controllers.MancalaController;
 import mancala.domain.IMancalaFactory;
+import mancala.domain.MancalaFactory;
 import mancala.persistence.IMancalaRepository;
+import mancala.persistence.MancalaRepository;
 
 public class App {
     private static final int PORT = 8080;
@@ -51,8 +53,8 @@ public class App {
 
     private static ResourceConfig createResources() {
         // Create the dependencies we want to inject
-        IMancalaFactory factory = null; // TODO: get implementation from domain
-        IMancalaRepository repository = null; // TODO: get implementation from persistence
+        IMancalaFactory factory = new MancalaFactory();
+        IMancalaRepository repository = new MancalaRepository();
         // Create the MancalaController and inject the dependencies
         MancalaController mancalaController = new MancalaController(factory, repository);
         // Register our MancalaController

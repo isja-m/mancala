@@ -8,7 +8,7 @@ type ContextType = {
 
 const MancalaGameContext = createContext<ContextType>({
     gameState: undefined,
-    setGameState() { },
+    setGameState() {},
 });
 
 type Props = React.PropsWithChildren;

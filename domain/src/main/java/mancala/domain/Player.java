@@ -48,7 +48,7 @@ class Player {
             opponent.setGameIsRunning(gameIsRunning);
         } else {
             isMyTurn = false;
-        opponent.receiveTurn(bowl);
+            opponent.receiveTurn(bowl);
         }
     }
 
