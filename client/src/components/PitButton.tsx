@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { playPit } from "../services/api";
+import { playPit, getPit } from "../services/api";
 
 type Props = {
     nrOfStones: number;
@@ -14,7 +14,15 @@ export const PitButton = (props: Props) => {
         "hover:text-neutral-800 ", "hover:bg-neutral-50", "hover:border-neutral-50 duration-300",
         { "text-neutral-300 bg-sogyo border-neutral-300": !isActive },
         { "text-neutral-800 bg-neutral-50 border-neutral-50": isActive })}
-        onClick={() => playPit(index)}>
+        onClick={() => clickPit(index)}>
         {nrOfStones}
     </button>)
+}
+
+const clickPit = async (index: number) => {
+    var pit = await getPit(0);
+    console.log("Before move:" + pit["nrOfStones"]);
+    playPit(index);
+    pit = await getPit(0);
+    console.log("After move:" + pit["nrOfStones"]);
 }

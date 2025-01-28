@@ -2,11 +2,19 @@ package mancala.api.controllers;
 
 import java.util.UUID;
 
-import jakarta.servlet.http.*;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.*;
-
-import mancala.api.models.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import mancala.api.models.MancalaDTO;
+import mancala.api.models.PitDTO;
+import mancala.api.models.PlayInputDTO;
+import mancala.api.models.StartInputDTO;
 import mancala.domain.IMancala;
 import mancala.domain.IMancalaFactory;
 import mancala.persistence.IMancalaRepository;
@@ -79,10 +87,10 @@ public class MancalaController {
     }
 
     @Path("/getPit")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @GET
+    // @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response play(@Context HttpServletRequest request, PitDTO body) {
+    public Response getPit(@Context HttpServletRequest request){//, PlayInputDTO body) {
         System.out.println("Ping!");
         // Retrieve HTTP session.
         HttpSession session = request.getSession(false);
@@ -93,8 +101,9 @@ public class MancalaController {
         // Retrieve the game from the database
         IMancala mancala = repository.get(gameId);
 
-        // Read index from body
-        int index = body.getIndex();
+        // TODO: somehow send index with get request
+        // int index = body.getIndexToPlay();
+        int index = 0;
 
         // Use the game to create a DTO.
         PitDTO output = new PitDTO(index, mancala.getStonesForPit(index));

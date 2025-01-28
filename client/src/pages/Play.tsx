@@ -1,12 +1,9 @@
 import { useMancalaGame } from "../contexts/MancalaGameContext";
 import { PitButton } from "../components/PitButton";
-import { getPit } from "../services/api";
 
 
 export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
-    const pit = getPit(0)
-    // print(pit)
 
     return <div>
         Player 1: {gameState?.players[0].name}<br />

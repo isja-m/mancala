@@ -1,4 +1,4 @@
-import { GameState } from "../types";
+import { GameState, Pit } from "../types";
 
 export async function startGame(player1: string, player2: string) {
     const response = await fetch("mancala/api/start", {
@@ -49,20 +49,21 @@ export async function playPit(index: number) {
 
 export async function getPit(indexToGet: number) {
     const response = await fetch("mancala/api/getPit", {
-        method: "POST",
+        method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            index : indexToGet,
-            nrOfStones: 0,
-        }),
+        // body: JSON.stringify({
+        //     index : indexToGet,
+        //     nrOfStones : 0,
+        // }),
     });
 
     if (response.ok) {
         const pitState = await response.json();
-        return pitState as Pit;
+        console.log("At api:" + pitState["index"])
+        return pitState;
     } else {
         return {
             statusCode: response.status,
