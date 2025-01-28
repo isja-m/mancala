@@ -41,7 +41,7 @@ export const PitButton = (props: Props) => {
         "hover:text-neutral-800 ", "hover:bg-neutral-50", "hover:border-neutral-50 duration-300",
          "text-neutral-300 bg-sogyo border-neutral-300")}
         onClick={() => clickPit()}>
-        {index}<br/>
+        <span style={{fontSize: '0.6em', color:'rgb(150,150,150)'}}>{index}</span><br/>
         {nrOfStones}
     </button>)
 }
