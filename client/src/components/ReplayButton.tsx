@@ -16,6 +16,8 @@ export const ReplayButton = (props: Props) => {
         const resetGame = async (gameState : GameState) => {
             document.getElementById("winnerNameField").textContent = "";
             const result = await startGame(gameState.players[0].name, gameState.players[1].name);
+            document.getElementById("currentTurnField").textContent = result.players[0].name;
+            document.getElementById("currentTurnDiv").style = "background-color: rgb(0,0,255); color: white";
     
             if (isGameState(result)) {
                 setGameState(result);

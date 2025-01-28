@@ -6,12 +6,11 @@ import { ReplayButton } from "../components/ReplayButton";
 
 export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
-    var displayReplayButton;
 
     return <div>
-        Player 1: {gameState?.players[0].name}<br />
-        Player 2: {gameState?.players[1].name}<br />
-        Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span>
+        <div style={{backgroundColor:'rgb(0,0,255)', color: 'white'}}>Player 1: {gameState?.players[0].name}</div>
+        <div style={{backgroundColor:'rgb(255,0,0)', color: 'white'}}>Player 2: {gameState?.players[1].name}</div>
+        <div style={{backgroundColor:'rgb(0,0,255)', color: 'white'}} id="currentTurnDiv">Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span></div>
         <table>
             <tbody>
                 <tr>

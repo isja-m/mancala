@@ -23,8 +23,10 @@ export const PitButton = (props: Props) => {
                 setGameState(result);
                 if (result.players[0].hasTurn) {
                     document.getElementById("currentTurnField").textContent = result.players[0].name;
+                    document.getElementById("currentTurnDiv").style = "background-color: rgb(0,0,255); color: white";
                 } else {
                     document.getElementById("currentTurnField").textContent = result.players[1].name;
+                    document.getElementById("currentTurnDiv").style = "background-color: rgb(255,0,0); color: white";
                 }
                 if (result.gameStatus.endOfGame) {
                     document.getElementById("winnerNameField").textContent = result.gameStatus.winner + " wins!"
