@@ -1,4 +1,4 @@
-import { GameState, Pit } from "../types";
+import { GameState, isGameState} from "../types";
 
 export async function startGame(player1: string, player2: string) {
     const response = await fetch("mancala/api/start", {
@@ -37,8 +37,8 @@ export async function playPit(index: number) {
     });
 
     if (response.ok) {
-        const gameState = await response.json();
-        return gameState as GameState;
+        const result = await response.json();
+        return result as GameState;
     } else {
         return {
             statusCode: response.status,
@@ -47,28 +47,13 @@ export async function playPit(index: number) {
     }
 }
 
-export async function getPit(indexToGet: number) {
-    const response = await fetch("mancala/api/getPit", {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        // body: JSON.stringify({
-        //     index : indexToGet,
-        //     nrOfStones : 0,
-        // }),
-    });
-
-    if (response.ok) {
-        const pitState = await response.json();
-        console.log("At api:" + pitState["index"])
-        return pitState;
+export function getSeeds(index: number, gameState: GameState | undefined) {
+    if (!isGameState(gameState)) {
+        return -1
+    } else if (index < 7) {
+        return gameState.players[0].pits[index].nrOfStones;
     } else {
-        return {
-            statusCode: response.status,
-            statusText: response.statusText
-        };
+        return gameState.players[1].pits[index - 7].nrOfStones;
     }
 }
 

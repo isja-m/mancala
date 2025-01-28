@@ -45,11 +45,11 @@ public class Mancala implements IMancala {
     };
 
     public Winner getWinner() {
-        if (getStonesForPit(6) == 24 && getStonesForPit(13) == 24) {
+        if (bowls.get(6).owner.getScore() == 24 && bowls.get(13).owner.getScore() == 24) {
             return Winner.DRAW;
-        } else if (getStonesForPit(6) > 24) {
+        } else if (bowls.get(6).owner.getScore() > 24) {
             return Winner.PLAYER_1;
-        } else if (getStonesForPit(13) > 24) {
+        } else if (bowls.get(13).owner.getScore() > 24) {
             return Winner.PLAYER_2;
         } else {
             return Winner.NO_ONE;
