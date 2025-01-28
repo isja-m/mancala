@@ -1,14 +1,17 @@
 import { useMancalaGame } from "../contexts/MancalaGameContext";
 import { getSeeds} from "../services/api";
 import { PitButton } from "../components/PitButton";
+import { ReplayButton } from "../components/ReplayButton";
 
 
 export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
+    var displayReplayButton;
 
     return <div>
         Player 1: {gameState?.players[0].name}<br />
         Player 2: {gameState?.players[1].name}<br />
+        Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span>
         <table>
             <tbody>
                 <tr>
@@ -41,6 +44,7 @@ export const Play = () => {
                 </tr>
             </tbody>
         </table>
-        <span id="winnerNameField"></span>
+        &emsp;<span id="winnerNameField"></span> <br/>
+        <ReplayButton isActive={gameState.gameStatus.endOfGame}/>
     </div>
 };
