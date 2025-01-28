@@ -8,9 +8,18 @@ export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
 
     return <div>
-        <div style={{backgroundColor:'rgb(0,0,255)', color: 'white'}}>Player 1: {gameState?.players[0].name}</div>
-        <div style={{backgroundColor:'rgb(255,0,0)', color: 'white'}}>Player 2: {gameState?.players[1].name}</div>
-        <div style={{backgroundColor:'rgb(0,0,255)', color: 'white'}} id="currentTurnDiv">Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span></div>
+        <table><tr>
+            <td>Player 1: {gameState?.players[0].name}</td><td><div style={{backgroundColor:'rgb(0,0,255)'}}>&emsp;&emsp;</div></td>
+        </tr></table>
+        <table><tr>
+            <td>Player 2: {gameState?.players[1].name}</td><td><div style={{backgroundColor:'rgb(255,0,0)'}}>&emsp;&emsp;</div></td>
+        </tr></table>
+        <table><tr>
+            <td><div style={{backgroundColor:'rgb(0,0,255)', color: 'white'}} id="currentTurnDiv">
+                Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span>&emsp;
+            </div></td>
+        </tr></table>
+        
         <table>
             <tbody>
                 <tr>
