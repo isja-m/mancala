@@ -11,15 +11,13 @@ import org.neo4j.driver.QueryConfig;
 import org.neo4j.driver.Driver;
 
 import mancala.domain.IMancala;
+import mancala.domain.Mancala;
 
 
 public class DBMancalaRepository implements IMancalaRepository {
-    private HashMap<String, IMancala> games; // TEMPORARY, REMOVE WHEN DB IS IMPLEMENTED
     private Driver driver;
 
     public DBMancalaRepository() {
-        this.games = new HashMap<>(); // TEMPORARY, REMOVE WHEN DB IS IMPLEMENTED
-
         final String dbUri = "bolt://localhost:7687";
         final String dbUser = "neo4j";
         final String dbPassword = "sogyopassword";
@@ -30,30 +28,39 @@ public class DBMancalaRepository implements IMancalaRepository {
     }
 
     public void save(String key, IMancala game) {
-        // Parse keystring
-        Pattern pattern = Pattern.compile(".*&");
-        Matcher matcher = pattern.matcher(key);
-        StringBuffer tail = new StringBuffer();
-        matcher.find();
-        String playerOne = matcher.group().replace("&", "");
-        matcher.replaceAll("");
-        matcher.appendTail(tail);
-        String playerTwo = tail.toString();
+        String[] parsedKey = parseKey(key);
+        String playerOne = parsedKey[0];
+        String playerTwo = parsedKey[1];
 
         ensureNodeExists(playerOne);
         ensureNodeExists(playerTwo);
 
         saveGame(playerOne, playerTwo, game);
-        
-        games.put(key, game); // TEMPORARY, REMOVE WHEN DB IS IMPLEMENTED
     };
 
     public IMancala get(String key) {
-        return games.get(key); // TEMPORARY, REMOVE WHEN DB IS IMPLEMENTED
+        String[] parsedKey = parseKey(key);
+        String playerOne = parsedKey[0];
+        String playerTwo = parsedKey[1];
+        var result = driver.executableQuery("MATCH (p:Person {name: $playerOne})"
+            + " - [r:PlayedFirstAgainst] -> (q:Person {name: $playerTwo})"
+            + " return r.gameString")
+            .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo))
+            .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
+            .execute();
+        return new Mancala(playerOne, playerTwo, result.records().get(0).get("r.gameString").asString()); 
     };
 
     public boolean containsKey(String key) {
-        return games.containsKey(key); // TEMPORARY, REMOVE WHEN DB IS IMPLEMENTED
+        String[] parsedKey = parseKey(key);
+        String playerOne = parsedKey[0];
+        String playerTwo = parsedKey[1];
+        var result = driver.executableQuery("MATCH  (p:Person {name: $playerOne}), (q:Person {name: $playerTwo}) "
+            + " RETURN EXISTS( (p)-[:PlayedFirstAgainst]-(q) )")
+            .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo))
+            .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
+            .execute();
+        return result.records().get(0).get("EXISTS( (p)-[:PlayedFirstAgainst]-(q) )").asBoolean();
     }
 
     private void ensureNodeExists(String name) {
@@ -71,6 +78,18 @@ public class DBMancalaRepository implements IMancalaRepository {
             .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo, "gameString", mancala.saveGameState()))
             .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
             .execute();
+    }
+
+    private String[] parseKey(String key) {
+        Pattern pattern = Pattern.compile(".*&");
+        Matcher matcher = pattern.matcher(key);
+        StringBuffer tail = new StringBuffer();
+        matcher.find();
+        String playerOne = matcher.group().replace("&", "");
+        matcher.replaceAll("");
+        matcher.appendTail(tail);
+        String playerTwo = tail.toString();
+        return new String[] {playerOne, playerTwo};
     }
     
 }
