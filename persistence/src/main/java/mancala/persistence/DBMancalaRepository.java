@@ -42,6 +42,8 @@ public class DBMancalaRepository implements IMancalaRepository {
 
         ensureNodeExists(playerOne);
         ensureNodeExists(playerTwo);
+
+        saveGame(playerOne, playerTwo, game);
         
         games.put(key, game); // TEMPORARY, REMOVE WHEN DB IS IMPLEMENTED
     };
@@ -61,8 +63,14 @@ public class DBMancalaRepository implements IMancalaRepository {
             .execute();
     }
 
-    private void saveGame() {
-        
+    private void saveGame(String playerOne, String playerTwo, IMancala mancala) {
+        var result = driver.executableQuery("MATCH (p:Person {name: $playerOne})"
+            + " MATCH (q:Person {name: $playerTwo})"
+            + " MERGE (p) - [r:PlayedFirstAgainst] -> (q)"
+            + " ON MATCH SET r.gameString = $gameString")
+            .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo, "gameString", mancala.saveGameState()))
+            .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
+            .execute();
     }
     
 }

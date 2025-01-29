@@ -10,10 +10,14 @@ public class Mancala implements IMancala {
     private String playerTwoName;
     private List<Bowl> bowls;
 
-    public Mancala(String playerOneName, String playerTwoName) {
+    public Mancala(String playerOneName, String playerTwoName, String gameState) {
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
-        initializeGame();
+        initializeGame(gameState);
+    }
+
+    public Mancala(String playerOneName, String playerTwoName) {
+        this(playerOneName, playerTwoName, "10404040404040004040404040400");
     }
     
     public String getNameOfPlayerOne() {
@@ -56,9 +60,9 @@ public class Mancala implements IMancala {
         }
     };
 
-    private void initializeGame() {
+    private void initializeGame(String gameState) {
         this.bowls = new ArrayList<Bowl>();
-        NormalBowl bowl = buildBoard();
+        NormalBowl bowl = buildBoard(gameState);
 
         bowls.add(bowl);
         for (int i = 1; i < 14; i++) {
@@ -66,15 +70,11 @@ public class Mancala implements IMancala {
         }
     }
 
-    private static NormalBowl buildBoard() {
-        return buildBoard("10404040404040004040404040400");
+    private static NormalBowl buildBoard(String gameState) {
+        return new NormalBowl(gameState);
     }
 
-    private static NormalBowl buildBoard(String gamestate) {
-
-        NormalBowl bowl = new NormalBowl(gameState);
-        return bowl;
+    public String saveGameState() {
+        return ((NormalBowl)bowls.get(0)).saveGameState();
     }
-
-
 }

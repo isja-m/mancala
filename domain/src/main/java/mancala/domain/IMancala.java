@@ -74,4 +74,11 @@ public interface IMancala {
      */
     Winner getWinner();
 
+    /**
+     * Method for the gameState as a string.
+     * 
+     * @return the gameState as a string.
+     */
+    String saveGameState();
+
 }
