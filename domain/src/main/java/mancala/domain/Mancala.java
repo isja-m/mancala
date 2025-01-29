@@ -67,7 +67,10 @@ public class Mancala implements IMancala {
     }
 
     private static NormalBowl buildBoard() {
-        String gameState = "10404040404040004040404040400";
+        return buildBoard("10404040404040004040404040400");
+    }
+
+    private static NormalBowl buildBoard(String gamestate) {
 
         NormalBowl bowl = new NormalBowl(gameState);
         return bowl;

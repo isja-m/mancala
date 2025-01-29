@@ -12,7 +12,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import mancala.api.models.MancalaDTO;
-import mancala.api.models.PitDTO;
 import mancala.api.models.PlayInputDTO;
 import mancala.api.models.StartInputDTO;
 import mancala.domain.IMancala;
@@ -38,11 +37,18 @@ public class MancalaController {
         // Create HTTP session.
         HttpSession session = request.getSession(true);
 
-        // Initialize game.
-        IMancala mancala = factory.createNewGame(body.getPlayer1(), body.getPlayer2());
+        // Create gameId, based on player names
+        String gameId = body.getPlayer1() + "&" + body.getPlayer2();
 
-        // Create a unique ID for this game.
-        String gameId = UUID.randomUUID().toString();
+        // Initialize game, from previous game if it exists.
+        IMancala mancala;
+        if (repository.containsKey(gameId)) {
+            mancala = repository.get(gameId);
+            System.out.println("Previous game found.");
+        } else {
+            mancala = factory.createNewGame(body.getPlayer1(), body.getPlayer2());
+            System.out.println("Creating new Game.");
+        }
 
         // Save the ID in the HTTP session.
         session.setAttribute("gameId", gameId);

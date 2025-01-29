@@ -10,7 +10,7 @@ import mancala.api.controllers.MancalaController;
 import mancala.domain.IMancalaFactory;
 import mancala.domain.MancalaFactory;
 import mancala.persistence.IMancalaRepository;
-import mancala.persistence.MancalaRepository;
+import mancala.persistence.DBMancalaRepository;
 
 public class App {
     private static final int PORT = 8080;
@@ -54,7 +54,7 @@ public class App {
     private static ResourceConfig createResources() {
         // Create the dependencies we want to inject
         IMancalaFactory factory = new MancalaFactory();
-        IMancalaRepository repository = new MancalaRepository();
+        IMancalaRepository repository = new DBMancalaRepository();
         // Create the MancalaController and inject the dependencies
         MancalaController mancalaController = new MancalaController(factory, repository);
         // Register our MancalaController

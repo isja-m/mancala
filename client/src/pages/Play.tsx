@@ -7,6 +7,15 @@ import styles from '../Play.module.css';
 
 export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
+    var playersTurn = "";
+    var turnColor = "";
+    if (gameState.players[0].hasTurn) {
+        playersTurn = gameState.players[0].name;
+        turnColor = "rgb(0,0,255)";
+    } else {
+        playersTurn = gameState.players[1].name;
+        turnColor = "rgb(255,0,0)";
+    }
 
     return <div>
         <table>
@@ -18,8 +27,8 @@ export const Play = () => {
             </tr>
         </table>
         <table><tr>
-            <td><div style={{backgroundColor:'rgb(0,0,255)', color: 'white'}} id="currentTurnDiv">
-                Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span>&emsp;
+            <td><div style={{backgroundColor:turnColor, color: 'white'}} id="currentTurnDiv">
+                Current turn: <span id="currentTurnField">{playersTurn}</span>&emsp;
             </div></td>
         </tr></table>
 

@@ -18,4 +18,8 @@ public class MancalaRepository implements IMancalaRepository {
         return games.get(key);
     };
 
+    public boolean containsKey(String key) {
+        return games.containsKey(key);
+    }
+
 }

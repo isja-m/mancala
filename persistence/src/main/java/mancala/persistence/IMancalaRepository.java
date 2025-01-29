@@ -19,4 +19,14 @@ public interface IMancalaRepository {
      */
     IMancala get(String key);
 
+    
+
+    /**
+     * Method to check a given keys existence in the repository
+     * 
+     * @param key The key
+     * @return Existence of key
+     */
+    boolean containsKey(String key);
+
 }
