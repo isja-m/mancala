@@ -1,0 +1,31 @@
+.PitButton {
+    background-color: rgb(207 175 145);
+    border-width: 0.3vw;
+    border-color: rgb(179, 141, 105);
+    color: "white";
+    /* padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0vw; */
+    padding-bottom: 3vw;
+    border-radius: 100vw;
+    font-size: 3vw;
+    line-height: 3vw;
+    transition-duration: 300ms;
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+.PitButton:hover {
+    background-color: rgb(236, 201, 167);
+    color: rgb(38 38 38);
+    border-color: rgb(218, 171, 128);
+}
+
+.MancalaBoard {
+    background-color: rgb(238 217 196);
+    border-radius: 2em;
+    width: 90%;
+    aspect-ratio: 3/1;
+    margin-left: auto;
+    margin-right: auto;
+}

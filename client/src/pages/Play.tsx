@@ -2,6 +2,7 @@ import { useMancalaGame } from "../contexts/MancalaGameContext";
 import { getSeeds} from "../services/api";
 import { PitButton } from "../components/PitButton";
 import { ReplayButton } from "../components/ReplayButton";
+import styles from '../Play.module.css';
 
 
 export const Play = () => {
@@ -21,8 +22,8 @@ export const Play = () => {
                 Current turn: <span id="currentTurnField">{gameState?.players[0].name}</span>&emsp;
             </div></td>
         </tr></table>
-        
-        <table>
+
+        <table className= {styles.MancalaBoard}>
             <tbody>
                 <tr>
                     <td></td>
@@ -54,6 +55,7 @@ export const Play = () => {
                 </tr>
             </tbody>
         </table>
+        
         &emsp;<span id="winnerNameField"></span> <br/>
         <ReplayButton isActive={gameState.gameStatus.endOfGame}/>
     </div>

@@ -4,6 +4,7 @@ import { useMancalaGame } from "../contexts/MancalaGameContext";
 import { useState } from "react";
 import { startGame } from "../services/api";
 import { GameState, isGameState } from "../types";
+import styles from '../Play.module.css';
 
 type Props = {
     nrOfStones: number;
@@ -36,12 +37,10 @@ export const PitButton = (props: Props) => {
             }
         }
 
-    return (<button className={classNames(
-        "py-1 px-3 rounded-full text-xl border-4",
-        "hover:text-neutral-800 ", "hover:bg-neutral-50", "hover:border-neutral-50 duration-300",
-         "text-neutral-300 bg-sogyo border-neutral-300")}
+    return (<button 
+        className= {styles.PitButton}
         onClick={() => clickPit()}>
-        <span style={{fontSize: '0.6em', color:'rgb(150,150,150)'}}>{index}</span><br/>
+        <span style={{fontSize: '1vw', color:'rgb(238,217,196)'}}>{index}</span><br/>
         {nrOfStones}
     </button>)
 }
