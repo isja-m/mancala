@@ -1,31 +1,102 @@
+body {
+    --board-background-color: rgb(238 217 196);
+    --pit-button-color: rgb(207 175 145);
+    --pit-button-hover-color: rgb(236, 201, 167);
+    --pit-border-color: rgb(179, 141, 105);
+    --pit-border-hover-color: rgb(218, 171, 128);
+    --player-one-background-color: rgb(100,100,255);
+    --player-one-border-color: rgb(50,50,155);
+    --player-two-background-color: rgb(255,100,100);
+    --player-two-border-color: rgb(155,50,50);
+    --draw-background-color: rgb(100,255,100);
+    --draw-border-color: rgb(50,155,50);
+    background-color: #bfd8ca;
+}
+
 .PitButton {
-    background-color: rgb(207 175 145);
+    background-color: var(--pit-button-color);
     border-width: 0.3vw;
-    border-color: rgb(179, 141, 105);
+    border-color: var(--pit-border-color);
     color: "white";
-    /* padding-left: 1vw;
-    padding-right: 1vw;
-    padding-top: 0vw; */
     padding-bottom: 3vw;
     border-radius: 100vw;
     font-size: 3vw;
     line-height: 3vw;
     transition-duration: 300ms;
-    width: 100%;
+    width: 11vw;
     aspect-ratio: 1/1;
 }
 
 .PitButton:hover {
-    background-color: rgb(236, 201, 167);
+    background-color: var(--pit-button-hover-color);
     color: rgb(38 38 38);
-    border-color: rgb(218, 171, 128);
+    border-color: var(--pit-border-hover-color);
 }
 
 .MancalaBoard {
-    background-color: rgb(238 217 196);
-    border-radius: 2em;
+    background-color: var(--board-background-color);
+    border-radius: 5vw;
     width: 90%;
     aspect-ratio: 3/1;
     margin-left: auto;
     margin-right: auto;
+}
+
+.PlayerTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.PlayerField {
+    border-radius: 1vw;
+    font-size: 2vw;
+    padding-bottom: 0.5vw;
+    padding-left: 1vw;
+    padding-top: 0.5vw;
+    padding-right: 1vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    border-width: 0.5vw;
+}
+
+.PlayerOne {
+    background-color: var(--player-one-background-color);
+    border-color: var(--player-one-border-color);
+}
+
+.PlayerTwo {
+    background-color: var(--player-two-background-color);
+    border-color: var(--player-two-border-color);
+}
+
+.ReplayButton {
+    margin-left: 7vw;
+    margin-right: 2vw;
+    margin-top: 0.5vw;
+    margin-bottom: 0vw;
+    width: 6vw;
+    height: 3vw;
+    float: left;
+    position: absolute;
+}
+
+.WinnerName {
+    margin-left: 40vw;
+    margin-right: 1vw;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    padding-bottom: 0.5vw;
+    padding-left: 1vw;
+    padding-top: 0.5vw;
+    padding-right: 1vw;
+    width: 20vw;
+    height: 5vw;
+    text-align: center;
+}
+
+.Draw {
+    background-color: var(--draw-background-color);
+    border-color: var(--draw-border-color);
 }

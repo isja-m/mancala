@@ -1,7 +1,5 @@
 package mancala.api.controllers;
 
-import java.util.UUID;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.Consumes;
@@ -44,10 +42,12 @@ public class MancalaController {
         IMancala mancala;
         if (repository.containsKey(gameId)) {
             mancala = repository.get(gameId);
-            System.out.println("Previous game found.");
         } else {
             mancala = factory.createNewGame(body.getPlayer1(), body.getPlayer2());
-            System.out.println("Creating new Game.");
+        }
+
+        if (mancala.isEndOfGame()) {
+            mancala = factory.createNewGame(body.getPlayer1(), body.getPlayer2());
         }
 
         // Save the ID in the HTTP session.

@@ -2,6 +2,7 @@ import { useMancalaGame } from "../contexts/MancalaGameContext";
 import { getSeeds} from "../services/api";
 import { PitButton } from "../components/PitButton";
 import { ReplayButton } from "../components/ReplayButton";
+import classNames from "classnames";
 import styles from '../Play.module.css';
 
 
@@ -9,28 +10,21 @@ export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
     var playersTurn = "";
     var turnColor = "";
+    var playerOneOpacity = 1;
+    var playerTwoOpacity = 1;
     if (gameState.players[0].hasTurn) {
-        playersTurn = gameState.players[0].name;
-        turnColor = "rgb(0,0,255)";
+        playerTwoOpacity = 0.5;
     } else {
-        playersTurn = gameState.players[1].name;
-        turnColor = "rgb(255,0,0)";
+        playerOneOpacity = 0.5;
     }
 
     return <div>
-        <table>
+        <table className= {styles.PlayerTable}>
             <tr>
-                <td>Player 1: {gameState?.players[0].name}</td><td>&emsp;</td><td><div style={{backgroundColor:'rgb(0,0,255)'}}>&emsp;&emsp;</div></td>
-            </tr>
-            <tr>
-                <td>Player 2: {gameState?.players[1].name}</td><td>&emsp;</td><td><div style={{backgroundColor:'rgb(255,0,0)'}}>&emsp;&emsp;</div></td>
+                <td><div id="PlayerOneField" style={{opacity: playerOneOpacity}} className={classNames(styles.PlayerOne, styles.PlayerField)}>Player 1: {gameState?.players[0].name}</div></td>
+                <td><div id="PlayerTwoField" style={{opacity: playerTwoOpacity}} className={classNames(styles.PlayerTwo, styles.PlayerField)}>Player 2: {gameState?.players[1].name}</div></td>
             </tr>
         </table>
-        <table><tr>
-            <td><div style={{backgroundColor:turnColor, color: 'white'}} id="currentTurnDiv">
-                Current turn: <span id="currentTurnField">{playersTurn}</span>&emsp;
-            </div></td>
-        </tr></table>
 
         <table className= {styles.MancalaBoard}>
             <tbody>
@@ -65,7 +59,9 @@ export const Play = () => {
             </tbody>
         </table>
         
-        &emsp;<span id="winnerNameField"></span> <br/>
-        <ReplayButton isActive={gameState.gameStatus.endOfGame}/>
+        <td><ReplayButton isActive={gameState.gameStatus.endOfGame}/></td>
+        <td><div style={{display: "none"}} className={classNames(styles.PlayerField, styles.PlayerOne, styles.WinnerName)} id="winnerOneField">{gameState?.players[0].name} wins!</div></td>
+        <td><div style={{display: "none"}} className={classNames(styles.PlayerField, styles.PlayerTwo, styles.WinnerName)} id="winnerTwoField">{gameState?.players[1].name} wins!</div></td>
+        <td><div style={{display: "none"}} className={classNames(styles.PlayerField, styles.Draw, styles.WinnerName)} id="drawField">Draw!</div></td>
     </div>
 };
