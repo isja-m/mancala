@@ -35,11 +35,8 @@ export const ReplayButton = (props: Props) => {
             }
         }
 
-    return (<button className={classNames(
-        "py-1 px-3 rounded-full text-xl border-4", styles.ReplayButton,
-        "hover:text-neutral-800 ", "hover:bg-neutral-50", "hover:border-neutral-50 duration-300",
-        { "text-neutral-300 bg-sogyo border-neutral-300": isActive },
-        { "text-neutral-800 bg-neutral-50 border-neutral-50": !isActive })}
+    return (<button
+        className={classNames(styles.ReplayButton, (isActive ? styles.ReplayButtonActive : styles.ReplayButtonInactive))}
         onClick={() => replay(gameState)}>
         Replay
     </button>)
