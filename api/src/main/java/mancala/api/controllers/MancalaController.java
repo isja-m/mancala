@@ -37,12 +37,15 @@ public class MancalaController {
 
         // Create gameId, based on player names
         String gameId = body.getPlayer1() + "&" + body.getPlayer2();
+        System.out.println("gameId: " + gameId);
 
         // Initialize game, from previous game if it exists.
         IMancala mancala;
         if (repository.containsKey(gameId)) {
+            System.out.println("Loading previous game.");
             mancala = repository.get(gameId);
         } else {
+            System.out.println("No existing games found. Adding new game to the database.");
             mancala = factory.createNewGame(body.getPlayer1(), body.getPlayer2());
         }
 

@@ -55,12 +55,14 @@ public class DBMancalaRepository implements IMancalaRepository {
         String[] parsedKey = parseKey(key);
         String playerOne = parsedKey[0];
         String playerTwo = parsedKey[1];
-        var result = driver.executableQuery("MATCH  (p:Person {name: $playerOne}), (q:Person {name: $playerTwo}) "
-            + " RETURN EXISTS( (p)-[:PlayedFirstAgainst]-(q) )")
+        System.out.println(playerOne + " " + playerTwo);
+        var result = driver.executableQuery("RETURN EXISTS{MATCH  (p:Person {name: $playerOne}) -[:PlayedFirstAgainst]-> (q:Person {name: $playerTwo})}")
             .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo))
             .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
             .execute();
-        return result.records().get(0).get("EXISTS( (p)-[:PlayedFirstAgainst]-(q) )").asBoolean();
+        System.out.println(result.records().get(0));
+        System.out.println(result.records().get(0).get("EXISTS{MATCH  (p:Person {name: $playerOne}) -[:PlayedFirstAgainst]-> (q:Person {name: $playerTwo})}"));
+        return result.records().get(0).get("EXISTS{MATCH  (p:Person {name: $playerOne}) -[:PlayedFirstAgainst]-> (q:Person {name: $playerTwo})}").asBoolean();
     }
 
     private void ensureNodeExists(String name) {
