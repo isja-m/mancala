@@ -37,7 +37,6 @@ public class MancalaController {
 
         // Create gameId, based on player names
         String gameId = body.getPlayer1() + "&" + body.getPlayer2();
-        System.out.println("gameId: " + gameId);
 
         // Initialize game, from previous game if it exists.
         IMancala mancala;

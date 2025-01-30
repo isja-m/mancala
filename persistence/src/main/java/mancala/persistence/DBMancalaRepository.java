@@ -55,13 +55,10 @@ public class DBMancalaRepository implements IMancalaRepository {
         String[] parsedKey = parseKey(key);
         String playerOne = parsedKey[0];
         String playerTwo = parsedKey[1];
-        System.out.println(playerOne + " " + playerTwo);
         var result = driver.executableQuery("RETURN EXISTS{MATCH  (p:Person {name: $playerOne}) -[:PlayedFirstAgainst]-> (q:Person {name: $playerTwo})}")
             .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo))
             .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
             .execute();
-        System.out.println(result.records().get(0));
-        System.out.println(result.records().get(0).get("EXISTS{MATCH  (p:Person {name: $playerOne}) -[:PlayedFirstAgainst]-> (q:Person {name: $playerTwo})}"));
         return result.records().get(0).get("EXISTS{MATCH  (p:Person {name: $playerOne}) -[:PlayedFirstAgainst]-> (q:Person {name: $playerTwo})}").asBoolean();
     }
 
@@ -76,7 +73,8 @@ public class DBMancalaRepository implements IMancalaRepository {
         var result = driver.executableQuery("MATCH (p:Person {name: $playerOne})"
             + " MATCH (q:Person {name: $playerTwo})"
             + " MERGE (p) - [r:PlayedFirstAgainst] -> (q)"
-            + " ON MATCH SET r.gameString = $gameString")
+            + " ON MATCH SET r.gameString = $gameString"
+            + " ON CREATE SET r.gameString = $gameString")
             .withParameters(Map.of("playerOne", playerOne, "playerTwo", playerTwo, "gameString", mancala.saveGameState()))
             .withConfig(QueryConfig.builder().withDatabase("neo4j").build())
             .execute();
