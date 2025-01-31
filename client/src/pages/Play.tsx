@@ -7,12 +7,10 @@ import styles from '../Play.module.css';
 
 
 export const Play = () => {
-    const { gameState, setGameState } = useMancalaGame();
-    var playersTurn = "";
-    var turnColor = "";
+    const { gameState } = useMancalaGame();
     var playerOneOpacity = 1;
     var playerTwoOpacity = 1;
-    if (gameState.players[0].hasTurn) {
+    if (gameState?.players[0].hasTurn) {
         playerTwoOpacity = 0.5;
     } else {
         playerOneOpacity = 0.5;
@@ -59,7 +57,7 @@ export const Play = () => {
             </tbody>
         </table>
         
-        <td><ReplayButton isActive={gameState.gameStatus.endOfGame}/></td>
+        <td><ReplayButton isActive={gameState?.gameStatus.endOfGame}/></td>
         <td><div style={{display: "none"}} className={classNames(styles.PlayerField, styles.PlayerOne, styles.WinnerName)} id="winnerOneField">{gameState?.players[0].name} wins!</div></td>
         <td><div style={{display: "none"}} className={classNames(styles.PlayerField, styles.PlayerTwo, styles.WinnerName)} id="winnerTwoField">{gameState?.players[1].name} wins!</div></td>
         <td><div style={{display: "none"}} className={classNames(styles.PlayerField, styles.Draw, styles.WinnerName)} id="drawField">Draw!</div></td>

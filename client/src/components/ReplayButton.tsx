@@ -6,16 +6,16 @@ import { GameState, isGameState } from "../types";
 import styles from '../Play.module.css';
 
 type Props = {
-    isActive : boolean;
+    isActive : boolean|undefined;
 };
 export const ReplayButton = (props: Props) => {
-    const { nrOfStones, index, isActive} = props;
+    const { isActive} = props;
     const { gameState, setGameState } = useMancalaGame();
     
         const [alert, setAlert] = useState<string | null>(null);
 
-        const resetGame = async (gameState : GameState) => {
-            const result = await startGame(gameState.players[0].name, gameState.players[1].name);
+        const resetGame = async (gameState : GameState | undefined) => {
+            const result = await startGame(gameState?.players[0].name, gameState?.players[1].name);
             document.getElementById("PlayerOneField").style = "";
             document.getElementById("PlayerTwoField").style = "opacity: 0.5;";
             document.getElementById("winnerOneField").style = "display: none;"
@@ -29,7 +29,7 @@ export const ReplayButton = (props: Props) => {
             }
         }
     
-        const replay = async () => {
+        const replay = async (gameState: GameState | undefined) => {
             if (isActive) {
                 resetGame(gameState);
             }

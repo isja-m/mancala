@@ -1,18 +1,15 @@
-import classNames from "classnames";
 import { playPit} from "../services/api";
 import { useMancalaGame } from "../contexts/MancalaGameContext";
 import { useState } from "react";
-import { startGame } from "../services/api";
-import { GameState, isGameState } from "../types";
+import {  isGameState } from "../types";
 import styles from '../Play.module.css';
 
 type Props = {
     nrOfStones: number;
     index: number;
-    isActive : boolean;
 };
 export const PitButton = (props: Props) => {
-    const { nrOfStones, index, isActive} = props;
+    const { nrOfStones, index} = props;
     const { setGameState } = useMancalaGame();
     
         const [alert, setAlert] = useState<string | null>(null);
