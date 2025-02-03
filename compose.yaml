@@ -12,8 +12,6 @@ services:
   mancala-client:
     build:
       context: ./client
-    # depends_on:
-    #   - mancala-api
     environment:
       NODE_ENV: development
     ports:
@@ -26,13 +24,13 @@ services:
           target: /usr/src/client
           action: sync
 
-  # mancala-api:
-  #   build:
-  #     context: ./api
-  #   environment:
-  #     NODE_ENV: production
-  #   ports:
-  #     - 8080:8080
+  mancala-backend:
+    build:
+      context: ./backend
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
 
   # todo-database:
   #   image: mongo:6
