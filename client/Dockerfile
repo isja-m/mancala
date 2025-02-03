@@ -14,7 +14,7 @@ FROM node:${NODE_VERSION}-alpine
 ENV NODE_ENV development
 
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/client
 
 
 COPY . .
