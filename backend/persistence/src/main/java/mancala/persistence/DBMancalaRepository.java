@@ -1,14 +1,13 @@
 package mancala.persistence;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.QueryConfig;
-import org.neo4j.driver.Driver;
 
 import mancala.domain.IMancala;
 import mancala.domain.Mancala;
@@ -18,7 +17,8 @@ public class DBMancalaRepository implements IMancalaRepository {
     private Driver driver;
 
     public DBMancalaRepository() {
-        final String dbUri = "bolt://localhost:7687";
+        final String dbUri = "bolt://host.docker.internal:7687";
+        // final String dbUri = "bolt://localhost:7687";
         final String dbUser = "neo4j";
         final String dbPassword = "sogyopassword";
 

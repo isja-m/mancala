@@ -55,7 +55,7 @@ public class App {
     private static ResourceConfig createResources() {
         // Create the dependencies we want to inject
         IMancalaFactory factory = new MancalaFactory();
-        IMancalaRepository repository = new MancalaRepository();
+        IMancalaRepository repository = new DBMancalaRepository();
         // Create the MancalaController and inject the dependencies
         MancalaController mancalaController = new MancalaController(factory, repository);
         // Register our MancalaController
