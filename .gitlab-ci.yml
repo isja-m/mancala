@@ -1,0 +1,9 @@
+image: gradle:8.12-jdk-alpine
+
+stages:
+    - sample-stage
+
+sample-job:
+    stage: sample-stage
+    script:
+        - echo "Hello world"

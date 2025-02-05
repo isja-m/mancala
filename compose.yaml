@@ -48,7 +48,7 @@ services:
       - ./neo4j_db/plugins:/plugins
     healthcheck:
       test: wget http://localhost:7474 || exit 1
-      interval: 1s
-      timeout: 10s
+      interval: 2s
+      timeout: 120s
       retries: 20
       start_period: 3s
