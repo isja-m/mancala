@@ -4,7 +4,7 @@ plugins {
     // This time we're building a command-line executable application.
     id 'application'
     id 'com.adarshr.test-logger' version '4.0.0'
-
+    id 'jacoco'
 }
 
 repositories {
@@ -51,3 +51,21 @@ test {
     // Use junit platform for unit tests
     useJUnitPlatform()
 }
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                "**/main.*",
+                "**/Renderer.*"
+            ])
+        }))
+    }
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+
