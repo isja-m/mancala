@@ -4,6 +4,6 @@ stages:
     - build-stage
 
 build-docker-container:
-    stage: sample-stage
+    stage: build-stage
     script:
         - docker compose up -d
