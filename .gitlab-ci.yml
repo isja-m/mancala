@@ -28,5 +28,5 @@ test-coverage:
             - api/build/jacocoHtml/**
         reports:
             junit:
-                - "**/build/test-results/test/TEST-*.xml"
+                - "**/api/build/test-results/test/TEST-*.xml"
         expire_in: 1 hour
