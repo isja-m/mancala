@@ -19,12 +19,12 @@ public class MancalaRepositoryTest {
         repository = new MancalaRepository();
     }
 
-    // @Test
-    // public void canLoadSavedGameToRepository() {
-    //     IMancala mancala = new Mancala("Allice", "Bob");
-    //     repository.save("key", mancala);
-    //     assertEquals(mancala.saveGameState(), repository.get("key").saveGameState());
-    // }
+    @Test
+    public void canLoadSavedGameToRepository() {
+        IMancala mancala = new Mancala("Allice", "Bob");
+        repository.save("key", mancala);
+        assertEquals(mancala.saveGameState(), repository.get("key").saveGameState());
+    }
 
     @Test
     public void findsExistingKey() {
