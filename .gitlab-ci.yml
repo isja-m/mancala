@@ -20,6 +20,7 @@ test-coverage:
     stage: test-stage
     script:
         - cd backend
+        - ': script'
         - ./gradlew check
         - cat api/build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     coverage: '/Total.*?([0-9]{1,3})%/'
