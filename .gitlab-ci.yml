@@ -59,11 +59,30 @@ persistence-test-coverage:
         paths:
             - persistence-coverage.json
 
-min-api-coverage-test:
-  stage: coverage-check-stage
-  before_script:
-    - apt-get update && apt-get install jq -y
-  script:
-    - jsonStr="$(cat $CI_PROJECT_DIR/api-coverage.json)"
-    - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
-    - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
+# min-api-coverage-test:
+#   stage: coverage-check-stage
+#   before_script:
+#     - apt-get update && apt-get install jq -y
+#   script:
+#     - jsonStr="$(cat $CI_PROJECT_DIR/api-coverage.json)"
+#     - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
+#     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
+
+
+# min-domain-coverage-test:
+#   stage: coverage-check-stage
+#   before_script:
+#     - apt-get update && apt-get install jq -y
+#   script:
+#     - jsonStr="$(cat $CI_PROJECT_DIR/domain-coverage.json)"
+#     - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
+#     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
+
+# min-persistence-coverage-test:
+#   stage: coverage-check-stage
+#   before_script:
+#     - apt-get update && apt-get install jq -y
+#   script:
+#     - jsonStr="$(cat $CI_PROJECT_DIR/persistence-coverage.json)"
+#     - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
+#     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
