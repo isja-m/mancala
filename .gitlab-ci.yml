@@ -1,8 +1,8 @@
 image: gradle:8.12-jdk-alpine
 
 stages:
-    - build-stage
     - test-stage
+    - build-stage
 
 build-backend:
     stage: build-stage
@@ -15,3 +15,18 @@ run-unittests:
     script:
         - cd backend/api
         - gradle test
+
+test-coverage:
+    stage: test
+    script:
+        - cd backend
+        - ./gradlew check
+        - cat api/build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+    coverage: '/Total.*?([0-9]{1,3})%/'
+    artifacts:
+        paths:
+            - api/build/jacocoHtml/**
+        reports:
+            junit:
+                - "**/build/test-results/test/TEST-*.xml"
+        expire_in: 1 hour
