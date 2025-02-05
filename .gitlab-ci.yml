@@ -3,7 +3,8 @@ image: gradle:8.12-jdk-alpine
 stages:
     - build-stage
 
-build-docker-container:
+build-backend:
     stage: build-stage
     script:
-        - docker compose up -d
+        - cd backend/api
+        - gradle build
