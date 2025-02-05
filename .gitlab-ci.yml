@@ -17,7 +17,7 @@ run-unittests:
         - gradle test
 
 test-coverage:
-    stage: test
+    stage: test-stage
     script:
         - cd backend
         - ./gradlew check
