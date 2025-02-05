@@ -1,9 +1,9 @@
 image: gradle:8.12-jdk-alpine
 
-before_script:
-    - ': before_script'
-    - chmod +x ./gradlew
-    - export GRADLE_USER_HOME=`pwd`/.gradle
+# before_script:
+#     - ': before_script'
+#     - chmod +x ./gradlew
+#     - export GRADLE_USER_HOME=`pwd`/.gradle
 
 stages:
     - test-stage
@@ -26,6 +26,7 @@ test-coverage:
     script:
         - cd backend
         - ': script'
+        - chmod +x ./gradlew
         - ./gradlew check
         - cat api/build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     coverage: '/Total.*?([0-9]{1,3})%/'
