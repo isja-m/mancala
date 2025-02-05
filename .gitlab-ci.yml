@@ -2,9 +2,16 @@ image: gradle:8.12-jdk-alpine
 
 stages:
     - build-stage
+    - test-stage
 
 build-backend:
     stage: build-stage
     script:
         - cd backend/api
         - gradle build
+
+run-unittests:
+    stage: test-stage 
+    script:
+        - cd backend/api
+        - gradle test
