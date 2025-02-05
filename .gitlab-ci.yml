@@ -1,9 +1,9 @@
 image: gradle:8.12-jdk-alpine
 
 stages:
-    - sample-stage
+    - build-stage
 
-sample-job:
+build-docker-container:
     stage: sample-stage
     script:
-        - echo "Hello world"
+        - docker compose up -d
