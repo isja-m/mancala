@@ -26,7 +26,7 @@ test-coverage:
     artifacts:
         paths:
             - api/build/jacocoHtml/**
-        reports:
-            junit:
-                - "**/api/build/test-results/test/TEST-*.xml"
+        # reports:
+        #     junit:
+        #         - "**/api/build/test-results/test/TEST-*.xml"
         expire_in: 1 hour
