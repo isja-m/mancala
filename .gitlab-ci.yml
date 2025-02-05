@@ -19,13 +19,29 @@ run-unittests:
 api-test-coverage:
     stage: test-stage
     script:
-        - cd backend
+        - cd backend/api
         - ': script'
         - chmod +x ./gradlew
         - ./gradlew check
-        # - cat api/build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     coverage: '/Total.*?([0-9]{1,3})%/'
-    # artifacts:
-    #     paths:
-    #         - api/build/jacocoHtml/**
-    #     expire_in: 1 hour
+
+domain-test-coverage:
+    stage: test-stage
+    script:
+        - cd backend/domain
+        - ': script'
+        - chmod +x ./gradlew
+        - ./gradlew check
+        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+    coverage: '/Total.*?([0-9]{1,3})%/'
+
+persistence-test-coverage:
+    stage: test-stage
+    script:
+        - cd backend/persistence
+        - ': script'
+        - chmod +x ./gradlew
+        - ./gradlew check
+        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+    coverage: '/Total.*?([0-9]{1,3})%/'
