@@ -11,7 +11,7 @@ import mancala.domain.IMancalaFactory;
 import mancala.domain.MancalaFactory;
 import mancala.persistence.IMancalaRepository;
 import mancala.persistence.DBMancalaRepository;
-import mancala.persistence.MancalaRepositoryTest;
+import mancala.persistence.MancalaRepository;
 
 public class App {
     private static final int PORT = 8080;
