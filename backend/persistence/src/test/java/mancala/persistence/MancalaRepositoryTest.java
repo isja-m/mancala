@@ -26,4 +26,16 @@ public class MancalaRepositoryTest {
         assertEquals(mancala.saveGameState(), repository.get("key").saveGameState());
     }
 
+    @Test
+    public void findsExistingKey() {
+        IMancala mancala = new Mancala("Allice", "Bob");
+        repository.save("key", mancala);
+        assertEquals(true, repository.containsKey("key"));
+    }
+
+    @Test
+    public void doesNotFindsNonexistantKey() {
+        assertEquals(false, repository.containsKey("key"));
+    }
+
 }
