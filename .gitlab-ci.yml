@@ -1,4 +1,4 @@
-image: gradle:8.12-jdk-alpine
+image: gradle:latest
 
 stages:
     - test-stage
