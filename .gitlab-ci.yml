@@ -80,7 +80,7 @@ min-domain-coverage-test:
         - ': script'
         - chmod +x ../gradlew
         - ../gradlew check
-        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*'/Total.*?([0-9]{1,3})%/'.*</tfoot>' #'/Total.*?([0-9]{1,3})%/'
+        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*/Total.*?([0-9]{1,3})%/.*</tfoot>' #'/Total.*?([0-9]{1,3})%/'
     # - echo coverage
     # - jsonStr="$(cat $CI_PROJECT_DIR/domain-coverage.json)"
     # - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
