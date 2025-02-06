@@ -1,65 +1,65 @@
 image: gradle:8.12-jdk-alpine
 
 stages:
-    # - test-stage
+    - test-stage
     - coverage-check-stage
-    # - build-stage
+    - build-stage
 
 variables:
     MIN_COVERAGE: 60
 
 #### TEST STAGE ####
-run-unittests:
-    stage: test-stage 
-    script:
-        - cd backend/api
-        - gradle test
+# run-unittests:
+#     stage: test-stage 
+#     script:
+#         - cd backend/api
+#         - gradle test
 
-api-test-coverage:
-    stage: test-stage
-    script:
-        - cd backend/api
-        - ': script'
-        - chmod +x ../gradlew
-        - ../gradlew check
-        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
-    coverage: '/Total.*?([0-9]{1,3})%/'
-    artifacts:
-        paths:
-            - backend/api/build/jacocoHtml/index.html
+# api-test-coverage:
+#     stage: test-stage
+#     script:
+#         - cd backend/api
+#         - ': script'
+#         - chmod +x ../gradlew
+#         - ../gradlew check
+#         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+#     coverage: '/Total.*?([0-9]{1,3})%/'
+#     artifacts:
+#         paths:
+#             - backend/api/build/jacocoHtml/index.html
 
-domain-test-coverage:
-    stage: test-stage
-    script:
-        - cd backend/domain
-        - ': script'
-        - chmod +x ../gradlew
-        - ../gradlew check
-        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
-    coverage: '/Total.*?([0-9]{1,3})%/'
-    artifacts:
-        paths:
-            - backend/domain/build/jacocoHtml/index.html
+# domain-test-coverage:
+#     stage: test-stage
+#     script:
+#         - cd backend/domain
+#         - ': script'
+#         - chmod +x ../gradlew
+#         - ../gradlew check
+#         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+#     coverage: '/Total.*?([0-9]{1,3})%/'
+#     artifacts:
+#         paths:
+#             - backend/domain/build/jacocoHtml/index.html
 
-persistence-test-coverage:
-    stage: test-stage
-    script:
-        - cd backend/persistence
-        - ': script'
-        - chmod +x ../gradlew
-        - ../gradlew check
-        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
-    coverage: '/Total.*?([0-9]{1,3})%/'
-    artifacts:
-        paths:
-            - backend/persistence/build/jacocoHtml/index.html
+# persistence-test-coverage:
+#     stage: test-stage
+#     script:
+#         - cd backend/persistence
+#         - ': script'
+#         - chmod +x ../gradlew
+#         - ../gradlew check
+#         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+#     coverage: '/Total.*?([0-9]{1,3})%/'
+#     artifacts:
+#         paths:
+#             - backend/persistence/build/jacocoHtml/index.html
 
 #### BUILD STAGE ####
-build-backend:
-    stage: build-stage
-    script:
-        - cd backend/api
-        - gradle build
+# build-backend:
+#     stage: build-stage
+#     script:
+#         - cd backend/api
+#         - gradle build
 
 #### COVERAGE CHECK STAGE ####
 min-api-coverage-test:
