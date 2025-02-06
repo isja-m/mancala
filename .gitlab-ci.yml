@@ -31,12 +31,11 @@ api-test-coverage:
     coverage: '/Total.*?([0-9]{1,3})%/'
     artifacts:
         paths:
-            - api-coverage.json
+            - backend/api/build/jacocoHtml/index.html
 
 domain-test-coverage:
     stage: test-stage
     script:
-        - echo "$PWD"
         - cd backend/domain
         - ': script'
         - chmod +x ../gradlew
@@ -45,7 +44,7 @@ domain-test-coverage:
     coverage: '/Total.*?([0-9]{1,3})%/'
     artifacts:
         paths:
-            - build/jacocoHtml/index.html
+            - backend/domain/build/jacocoHtml/index.html
 
 persistence-test-coverage:
     stage: test-stage
@@ -58,7 +57,7 @@ persistence-test-coverage:
     coverage: '/Total.*?([0-9]{1,3})%/'
     artifacts:
         paths:
-            - persistence-coverage.json
+            - backend/persistence/build/jacocoHtml/index.html
 
 min-api-coverage-test:
     stage: coverage-check-stage
@@ -90,6 +89,7 @@ min-persistence-coverage-test:
     - ': script'
     - chmod +x ../gradlew
     - ../gradlew check
+    - echo cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%'
     - persistenceCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*')
     - echo $persistenceCoverage
     - if (( $(echo "$persistenCecoverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$persistenceCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
