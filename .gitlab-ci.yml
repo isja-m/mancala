@@ -29,9 +29,9 @@ api-test-coverage:
         - ../gradlew check
         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     coverage: '/Total.*?([0-9]{1,3})%/'
-    artifacts:
-        paths:
-            - api-coverage.json
+    # artifacts:
+    #     paths:
+    #         - api-coverage.json
 
 domain-test-coverage:
     stage: test-stage
@@ -42,9 +42,9 @@ domain-test-coverage:
         - ../gradlew check
         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     coverage: '/Total.*?([0-9]{1,3})%/'
-    artifacts:
-        paths:
-            - build/jacocoHtml/index.html
+    # artifacts:
+    #     paths:
+    #         - build/jacocoHtml/index.html
 
 persistence-test-coverage:
     stage: test-stage
@@ -55,9 +55,9 @@ persistence-test-coverage:
         - ../gradlew check
         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     coverage: '/Total.*?([0-9]{1,3})%/'
-    artifacts:
-        paths:
-            - persistence-coverage.json
+    # artifacts:
+    #     paths:
+    #         - persistence-coverage.json
 
 # min-api-coverage-test:
 #   stage: coverage-check-stage
