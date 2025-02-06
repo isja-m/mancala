@@ -60,35 +60,36 @@ build-backend:
     #     paths:
     #         - persistence-coverage.json
 
-# min-api-coverage-test:
-#   stage: coverage-check-stage
-#   before_script:
-#     - apt-get update && apt-get install jq -y
-#   script:
-#     - jsonStr="$(cat $CI_PROJECT_DIR/api-coverage.json)"
-#     - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
-#     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
+min-api-coverage-test:
+  stage: coverage-check-stage
+    script:
+        - cd backend/api
+        - ': script'
+        - chmod +x ../gradlew
+        - ../gradlew check
+        - coverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*')
+        - echo $coverage
+        - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
 
 
 min-domain-coverage-test:
     stage: coverage-check-stage
-    #   before_script:
-    #     - apt-get update && apt-get install jq -y
     script:
-        - echo "$PWD"
         - cd backend/domain
         - ': script'
         - chmod +x ../gradlew
         - ../gradlew check
-        - coverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*') #'/Total.*?([0-9]{1,3})%/'
-        - echo coverage
+        - coverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*')
+        - echo $coverage
         - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
 
-# min-persistence-coverage-test:
-#   stage: coverage-check-stage
-#   before_script:
-#     - apt-get update && apt-get install jq -y
-#   script:
-#     - jsonStr="$(cat $CI_PROJECT_DIR/persistence-coverage.json)"
-#     - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
-#     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
+min-persistence-coverage-test:
+  stage: coverage-check-stage
+  script:
+    - cd backend/persistence
+    - ': script'
+    - chmod +x ../gradlew
+    - ../gradlew check
+    - coverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*')
+    - echo $coverage
+    - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
