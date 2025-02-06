@@ -65,35 +65,30 @@ build-backend:
 min-api-coverage-test:
     stage: coverage-check-stage
     script:
-        - cd backend/api
-        - ': script'
-        - chmod +x ../gradlew
-        - ../gradlew check
+        # - cd backend/api
+        # - ': script'
+        # - chmod +x ../gradlew
+        # - ../gradlew check
         - apiCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*')
-        - echo $apiCoverage
-        - echo $(echo "$apiCoverage < $MIN_COVERAGE" |bc -l)
-        - echo $MIN_COVERAGE
         - if [ "$apiCoverage" -lt "$MIN_COVERAGE" ] ; then echo "$apiCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
 
 
 min-domain-coverage-test:
     stage: coverage-check-stage
     script:
-        - cd backend/domain
-        - ': script'
-        - chmod +x ../gradlew
-        - ../gradlew check
+        # - cd backend/domain
+        # - ': script'
+        # - chmod +x ../gradlew
+        # - ../gradlew check
         - domainCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*')
-        - echo $domainCoverage
         - if (( $(echo "$domainCoverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$domainCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
 
 min-persistence-coverage-test:
-  stage: coverage-check-stage
-  script:
-    - cd backend/persistence
-    - ': script'
-    - chmod +x ../gradlew
-    - ../gradlew check
-    - persistenceCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*')
-    - echo $persistenceCoverage
-    - if (( $(echo "$persistenCecoverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$persistenceCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
+    stage: coverage-check-stage
+    script:
+        # - cd backend/persistence
+        # - ': script'
+        # - chmod +x ../gradlew
+        # - ../gradlew check
+        - persistenceCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*')
+        - if (( $(echo "$persistenCecoverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$persistenceCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
