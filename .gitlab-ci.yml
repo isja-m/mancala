@@ -6,7 +6,7 @@ stages:
     - build-stage
 
 variables:
-    MIN_COVERAGE: 60
+    MIN_COVERAGE: 80
 
 #### TEST STAGE ####
 # run-unittests:
@@ -92,7 +92,6 @@ min-persistence-coverage-test:
     - ': script'
     - chmod +x ../gradlew
     - ../gradlew check
-    - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%'
     - persistenceCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*')
     - echo $persistenceCoverage
     - if (( $(echo "$persistenCecoverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$persistenceCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
