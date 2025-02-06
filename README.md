@@ -5,7 +5,7 @@ This project is a selfcontained app to play the game 'Mancala' in your browser. 
 ## Build instructions
 You can build this project in a docker container by running
 ```console
-> docker compose up -docker
+> docker compose up -d
 ```
 in root folder of the repository.
 
