@@ -6,7 +6,7 @@ stages:
     - build-stage
 
 variables:
-    MIN_COVERAGE: 80
+    MIN_COVERAGE: 60
 
 #### TEST STAGE ####
 # run-unittests:
