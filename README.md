@@ -1,6 +1,6 @@
 # Mancala
 
-[![Coverage](https://gitlab.com/<namespace>/<project>/badges/<branch>/coverage.svg)](https://gitlab.com/<namespace>/<project>/)
+[![Coverage](https://gitlab.com/imannens/mancala-java/badges/mvc/coverage.svg)](https://gitlab.com/imannens/mancala-java/)
 
 This project is a selfcontained app to play the game 'Mancala' in your browser. It was created as an exercise as part of the Sogyo traineeship.
 
