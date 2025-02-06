@@ -33,16 +33,16 @@ build-backend:
     #     paths:
     #         - api-coverage.json
 
-domain-test-coverage:
-    stage: test-stage
-    script:
-        - echo "$PWD"
-        - cd backend/domain
-        - ': script'
-        - chmod +x ../gradlew
-        - ../gradlew check
-        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
-    coverage: '/Total.*?([0-9]{1,3})%/'
+# domain-test-coverage:
+#     stage: test-stage
+#     script:
+#         - echo "$PWD"
+#         - cd backend/domain
+#         - ': script'
+#         - chmod +x ../gradlew
+#         - ../gradlew check
+#         - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+#     coverage: '/Total.*?([0-9]{1,3})%/'
     # artifacts:
     #     paths:
     #         - build/jacocoHtml/index.html
@@ -80,7 +80,7 @@ min-domain-coverage-test:
         - ': script'
         - chmod +x ../gradlew
         - ../gradlew check
-        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total' #'/Total.*?([0-9]{1,3})%/'
+        - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*?[0-9]' #'/Total.*?([0-9]{1,3})%/'
     # - echo coverage
     # - jsonStr="$(cat $CI_PROJECT_DIR/domain-coverage.json)"
     # - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
