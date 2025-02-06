@@ -69,15 +69,15 @@ persistence-test-coverage:
 #     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
 
 
-# min-domain-coverage-test:
-#   stage: coverage-check-stage
-#   before_script:
-#     - apt-get update && apt-get install jq -y
-#   script:
-#     - jsonStr="$(cat $CI_PROJECT_DIR/domain-coverage.json)"
-#     - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
-#     - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
-
+min-domain-coverage-test:
+  stage: coverage-check-stage
+  before_script:
+    - apt-get update && apt-get install jq -y
+  script:
+    # - jsonStr="$(cat $CI_PROJECT_DIR/domain-coverage.json)"
+    - coverage=`curl -s "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/pipelines/${CI_PIPELINE_ID}/jobs?private_token=${PRIVATE_TOKEN}" | jq --arg JOB_NAME "$JOB_NAME" '.[] | select(.name==$JOB_NAME) | .coverage'`
+    # - coverage="$(echo $jsonStr | jq .totals.percent_covered)"
+    - if (( $(echo "$coverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$coverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
 # min-persistence-coverage-test:
 #   stage: coverage-check-stage
 #   before_script:
