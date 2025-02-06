@@ -61,7 +61,7 @@ build-backend:
     #         - persistence-coverage.json
 
 min-api-coverage-test:
-  stage: coverage-check-stage
+    stage: coverage-check-stage
     script:
         - 'cd backend/api'
         - ': script'
