@@ -1,24 +1,19 @@
 image: gradle:8.12-jdk-alpine
 
 stages:
-    - test-stage
+    # - test-stage
     - coverage-check-stage
-    - build-stage
+    # - build-stage
 
 variables:
     MIN_COVERAGE: 60
 
-build-backend:
-    stage: build-stage
+#### TEST STAGE ####
+run-unittests:
+    stage: test-stage 
     script:
         - cd backend/api
-        - gradle build
-
-# run-unittests:
-#     stage: test-stage 
-#     script:
-#         - cd backend/api
-#         - gradle test
+        - gradle test
 
 api-test-coverage:
     stage: test-stage
@@ -59,6 +54,14 @@ persistence-test-coverage:
         paths:
             - backend/persistence/build/jacocoHtml/index.html
 
+#### BUILD STAGE ####
+build-backend:
+    stage: build-stage
+    script:
+        - cd backend/api
+        - gradle build
+
+#### COVERAGE CHECK STAGE ####
 min-api-coverage-test:
     stage: coverage-check-stage
     script:
@@ -89,7 +92,7 @@ min-persistence-coverage-test:
     - ': script'
     - chmod +x ../gradlew
     - ../gradlew check
-    - echo cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
+    - cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>'
     - persistenceCoverage=$(cat build/jacocoHtml/index.html | grep -o '<tfoot>.*</tfoot>' | grep -o 'Total.*[0-9]*%' | grep -o '[0-9]*%<' | grep -o '[0-9]*')
     - echo $persistenceCoverage
     - if (( $(echo "$persistenCecoverage < $MIN_COVERAGE" |bc -l) )) ; then echo "$persistenceCoverage% of code coverage below threshold of $MIN_COVERAGE%" && exit 1 ; else exit 0 ; fi
