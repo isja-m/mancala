@@ -15,8 +15,6 @@ WORKDIR /usr/src
 
 COPY . .
 
-WORKDIR /usr/src/api
-
 EXPOSE 8080
 
 USER root
