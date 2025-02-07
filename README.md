@@ -4,7 +4,7 @@
 ![API coverage](https://git.sogyo.nl/imannens/mancala-java/badges/mvc/coverage.svg?job=persistence-test-coverage&key_text=Persistence+Coverage&key_width=130)
 ![Pipeline status](https://git.sogyo.nl/imannens/mancala-java/badges/mvc/pipeline.svg?key_text=Pipeline+status&key_width=130)
 
-This project is a selfcontained app to play the game 'Mancala' in your browser. It was created as an exercise as part of the Sogyo traineeship.
+This project is a self contained app to play the game 'Mancala' in your browser. It was created as an exercise as part of the Sogyo traineeship.
 
 ## Build instructions
 You can build this project in a docker container by running
