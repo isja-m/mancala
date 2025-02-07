@@ -1,4 +1,7 @@
 # Mancala
+![API coverage](https://git.sogyo.nl/imannens/mancala-java/badges/mvc/coverage.svg?job=api-test-coverage&key_text=API+Coverage&key_width=130)
+![API coverage](https://git.sogyo.nl/imannens/mancala-java/badges/mvc/coverage.svg?job=domain-test-coverage&key_text=Domain+Coverage&key_width=130)
+![API coverage](https://git.sogyo.nl/imannens/mancala-java/badges/mvc/coverage.svg?job=persistence-test-coverage&key_text=Persistence+Coverage&key_width=130)
 
 This project is a selfcontained app to play the game 'Mancala' in your browser. It was created as an exercise as part of the Sogyo traineeship.
 
