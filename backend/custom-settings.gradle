@@ -1,0 +1,7 @@
+gradle.projectsLoaded {
+    rootProject.allProjects {
+        afterEvaluate {
+            version = 'x.y.z'
+        }
+    }
+}

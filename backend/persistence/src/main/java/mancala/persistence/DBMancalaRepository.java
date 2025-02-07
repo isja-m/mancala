@@ -17,13 +17,23 @@ public class DBMancalaRepository implements IMancalaRepository {
     private Driver driver;
 
     public DBMancalaRepository() {
-        final String dbUri = "bolt://host.docker.internal:7687";
-        // final String dbUri = "bolt://localhost:7687";
+        String dbUri;
         final String dbUser = "neo4j";
         final String dbPassword = "sogyopassword";
 
-        driver = GraphDatabase.driver(dbUri, AuthTokens.basic(dbUser, dbPassword));
-        driver.verifyConnectivity();
+        
+        try {
+            dbUri = "bolt://host.docker.internal:7687";
+
+            driver = GraphDatabase.driver(dbUri, AuthTokens.basic(dbUser, dbPassword));
+            driver.verifyConnectivity();
+        } catch (Exception e) {}
+        try {
+            dbUri = "bolt://localhost:7687";
+
+            driver = GraphDatabase.driver(dbUri, AuthTokens.basic(dbUser, dbPassword));
+            driver.verifyConnectivity();
+        } catch (Exception e) {}
         System.out.println("Connection established.");
     }
 

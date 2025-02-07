@@ -7,10 +7,8 @@
 <file name="C:\Users\sogyo\mancala-java\backend\domain\src\main\java\mancala\domain\IMancalaFactory.java">
 </file>
 <file name="C:\Users\sogyo\mancala-java\backend\domain\src\main\java\mancala\domain\KalahaBowl.java">
-<error line="38" column="5" severity="error" message="Cyclomatic Complexity is 5 (max allowed is 4)." source="com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck"/>
 </file>
 <file name="C:\Users\sogyo\mancala-java\backend\domain\src\main\java\mancala\domain\Mancala.java">
-<error line="51" column="5" severity="error" message="Cyclomatic Complexity is 5 (max allowed is 4)." source="com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck"/>
 </file>
 <file name="C:\Users\sogyo\mancala-java\backend\domain\src\main\java\mancala\domain\MancalaFactory.java">
 </file>

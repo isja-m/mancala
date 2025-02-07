@@ -45,8 +45,3 @@ checkstyle {
         }
     }
 }
-
-// checkstyleMain << {
-//         ant.xslt(in: file("$project.rootDir/reports/checkstyle/$project.name/main.xml"),
-//                 out: rootProject.file('config/aggregated.html'))
-// }

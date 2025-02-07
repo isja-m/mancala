@@ -6,6 +6,7 @@ plugins {
     id 'com.adarshr.test-logger' version '4.0.0'
     id 'jacoco'
     id 'checkstyle'
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 repositories {
@@ -75,7 +76,6 @@ checkstyle {
     }
 }
 
-// checkstyleMain << {
-//         ant.xslt(in: file("$project.rootDir/reports/checkstyle/$project.name/main.xml"),
-//                 out: rootProject.file('config/aggregated.html'))
-// }
+tasks.jar {
+    manifest.attributes["Main-Class"] = "org.example.MainKt"
+}

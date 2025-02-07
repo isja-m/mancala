@@ -5,9 +5,18 @@ stages:
     - test-stage
     - coverage-check-stage
     - build-stage
+    - jar-stage
 
 variables:
     MIN_COVERAGE: 60
+    VERSION: '1.0.0'
+
+#### CHECKSTYLE STAGE ####
+checkstyle:
+    stage: checkstyle-stage
+    script:
+        - cd backend
+        - gradle checkstyleMain
 
 #### TEST STAGE ####
 run-unittests:
@@ -80,11 +89,14 @@ build-backend:
     stage: build-stage
     script:
         - cd backend/api
-        - gradle build
+        - gradle -Pversion=$VERSION build
 
-#### CHECKSTYLE STAGE ####
-checkstyle:
-    stage: checkstyle-stage
+#### JAR STAGE ####
+build-jar:
+    stage: jar-stage
     script:
         - cd backend
-        - gradle checkstyleMain
+        - ./gradlew -Pversion='1.0.0' shadowJar
+    artifacts:
+        paths:
+            - backend/api/build/libs/*
