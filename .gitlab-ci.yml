@@ -1,10 +1,10 @@
 image: gradle:8.12-jdk-alpine
 
 stages:
+    - checkstyle-stage
     - test-stage
     - coverage-check-stage
     - build-stage
-    - checkstyle-stage
 
 variables:
     MIN_COVERAGE: 60
