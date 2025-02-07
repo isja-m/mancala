@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.21.2">
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\App.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\controllers\MancalaController.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\models\GameStatusDTO.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\models\MancalaDTO.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\models\PitDTO.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\models\PlayerDTO.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\models\PlayInputDTO.java">
+</file>
+<file name="C:\Users\sogyo\mancala-java\backend\api\src\main\java\mancala\api\models\StartInputDTO.java">
+</file>
+</checkstyle>

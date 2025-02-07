@@ -5,6 +5,7 @@ plugins {
     id 'application'
     id 'com.adarshr.test-logger' version '4.0.0'
     id 'jacoco'
+    id 'checkstyle'
 }
 
 repositories {
@@ -62,3 +63,19 @@ jacocoTestReport {
     }
 }
 
+checkstyle {
+    toolVersion '10.21.2'
+    configFile file("../config/checkstyle/checkstyle.xml")
+        reportsDir = file("$project.rootDir/reports/checkstyle/$project.name")
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.required = true
+            html.required = true
+        }
+    }
+}
+
+// checkstyleMain << {
+//         ant.xslt(in: file("$project.rootDir/reports/checkstyle/$project.name/main.xml"),
+//                 out: rootProject.file('config/aggregated.html'))
+// }

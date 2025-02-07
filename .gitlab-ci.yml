@@ -4,6 +4,7 @@ stages:
     - test-stage
     - coverage-check-stage
     - build-stage
+    - checkstyle-stage
 
 variables:
     MIN_COVERAGE: 60
@@ -80,3 +81,10 @@ build-backend:
     script:
         - cd backend/api
         - gradle build
+
+#### CHECKSTYLE STAGE ####
+checkstyle:
+    stage: checkstyle-stage
+    script:
+        - cd backend
+        - gradle checkstyleMain
